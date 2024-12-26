@@ -1,0 +1,10 @@
+session_name: Treesitter project
+windows:
+  - window_name: dev window
+    panes:
+      - nv .
+  - window_name: run window
+    layout: even-horizontal
+    panes:
+      - tree-sitter generate && tree-sitter parse test_file.npf
+      - nv test_file.npf

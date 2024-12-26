@@ -1,0 +1,284 @@
+[
+  {
+    "type": "bash_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bash_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_content",
+          "named": true
+        },
+        {
+          "type": "bash_section_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bash_section_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_section_names",
+          "named": true
+        },
+        {
+          "type": "options",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bash_section_names",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "document",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "python_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "python_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "python_content",
+          "named": true
+        },
+        {
+          "type": "python_section_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "python_section_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "options",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "role",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_numeric",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_section",
+          "named": true
+        },
+        {
+          "type": "python_section",
+          "named": true
+        },
+        {
+          "type": "txt_section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_numeric",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tags",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "txt_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "txt_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "txt_content",
+          "named": true
+        },
+        {
+          "type": "txt_section_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "txt_section_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "alpha_numeric",
+    "named": true
+  },
+  {
+    "type": "config",
+    "named": false
+  },
+  {
+    "type": "info",
+    "named": false
+  },
+  {
+    "type": "late_variables",
+    "named": false
+  },
+  {
+    "type": "options",
+    "named": true
+  },
+  {
+    "type": "pyexit",
+    "named": false
+  },
+  {
+    "type": "script",
+    "named": false
+  },
+  {
+    "type": "variables",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  }
+]

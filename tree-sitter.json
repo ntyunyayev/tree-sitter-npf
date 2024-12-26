@@ -1,0 +1,37 @@
+{
+  "grammars": [
+    {
+      "name": "npf",
+      "camelcase": "Npf",
+      "scope": "source.npf",
+      "path": ".",
+      "file-types": ["npf"],
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm",
+      "injection-regex": "npf"
+
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Parser for the npf language used to orchestrate network experiments",
+    "authors": [
+      {
+        "name": "Nikita Tyunyayev",
+        "email": "nikita.tyunyayev@uclouvain.be"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/ntyunyayev/tree-sitter-npf"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
