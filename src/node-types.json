@@ -32,15 +32,15 @@
       "required": true,
       "types": [
         {
-          "type": "bash_section_names",
-          "named": true
-        },
-        {
           "type": "options",
           "named": true
         },
         {
           "type": "role",
+          "named": true
+        },
+        {
+          "type": "section_name",
           "named": true
         },
         {
@@ -51,18 +51,13 @@
     }
   },
   {
-    "type": "bash_section_names",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "document",
     "named": true,
     "root": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "section",
@@ -101,7 +96,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "options",
@@ -112,22 +107,11 @@
           "named": true
         },
         {
-          "type": "tags",
+          "type": "section_name",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "role",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
+        },
         {
-          "type": "alpha_numeric",
+          "type": "tags",
           "named": true
         }
       ]
@@ -155,6 +139,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "section_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "tag",
@@ -216,10 +205,18 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
+          "type": "options",
+          "named": true
+        },
+        {
           "type": "role",
+          "named": true
+        },
+        {
+          "type": "section_name",
           "named": true
         },
         {
@@ -234,7 +231,27 @@
     "named": false
   },
   {
-    "type": "%",
+    "type": "%config",
+    "named": false
+  },
+  {
+    "type": "%info",
+    "named": false
+  },
+  {
+    "type": "%late_variables",
+    "named": false
+  },
+  {
+    "type": "%pyexit",
+    "named": false
+  },
+  {
+    "type": "%script",
+    "named": false
+  },
+  {
+    "type": "%variables",
     "named": false
   },
   {
@@ -242,40 +259,16 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "alpha_numeric",
     "named": true
-  },
-  {
-    "type": "config",
-    "named": false
-  },
-  {
-    "type": "info",
-    "named": false
-  },
-  {
-    "type": "late_variables",
-    "named": false
   },
   {
     "type": "options",
     "named": true
   },
   {
-    "type": "pyexit",
-    "named": false
-  },
-  {
-    "type": "script",
-    "named": false
-  },
-  {
-    "type": "variables",
-    "named": false
+    "type": "role",
+    "named": true
   },
   {
     "type": "|",

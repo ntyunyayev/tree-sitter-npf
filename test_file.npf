@@ -1,6 +1,7 @@
+
 test1,test2%script@server delay=100ms
 iperf -s
-
+iperf -s
 
 test1,test2%script@server delay=100ms
 iperf -s

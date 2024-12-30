@@ -3,7 +3,7 @@
   "name": "npf",
   "rules": {
     "document": {
-      "type": "REPEAT",
+      "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
         "name": "section"
@@ -34,8 +34,13 @@
           "name": "bash_section_header"
         },
         {
-          "type": "SYMBOL",
-          "name": "bash_content"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "bash_content"
         }
       ]
     },
@@ -47,8 +52,13 @@
           "name": "txt_section_header"
         },
         {
-          "type": "SYMBOL",
-          "name": "txt_content"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "txt_content"
         }
       ]
     },
@@ -60,10 +70,19 @@
           "name": "python_section_header"
         },
         {
-          "type": "SYMBOL",
-          "name": "python_content"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "python_content"
         }
       ]
+    },
+    "tag": {
+      "type": "SYMBOL",
+      "name": "alpha_numeric"
     },
     "tags": {
       "type": "SEQ",
@@ -100,44 +119,49 @@
       ]
     },
     "role": {
-      "type": "SYMBOL",
-      "name": "alpha_numeric"
-    },
-    "tag": {
-      "type": "SYMBOL",
-      "name": "alpha_numeric"
+      "type": "PATTERN",
+      "value": "[^\\S\\n]+"
     },
     "options": {
       "type": "PATTERN",
-      "value": "[^\\n]+"
-    },
-    "role_and_optional_tags": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "role"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "tags"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+      "value": "[^\\@\\n]+"
     },
     "bash_section_names": {
       "type": "CHOICE",
       "members": [
         {
           "type": "STRING",
-          "value": "script"
+          "value": "%script"
+        }
+      ]
+    },
+    "python_section_names": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%pyexit"
+        },
+        {
+          "type": "STRING",
+          "value": "%variables"
+        },
+        {
+          "type": "STRING",
+          "value": "%late_variables"
+        },
+        {
+          "type": "STRING",
+          "value": "%config"
+        }
+      ]
+    },
+    "txt_section_names": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%info"
         }
       ]
     },
@@ -157,28 +181,20 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "%"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bash_section_names"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "bash_section_names"
+          },
+          "named": true,
+          "value": "section_name"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "@"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "role"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "role"
             },
             {
               "type": "BLANK"
@@ -219,15 +235,23 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "%"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "txt_section_names"
+          },
+          "named": true,
+          "value": "section_name"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "info"
+              "type": "SYMBOL",
+              "name": "role"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         },
@@ -235,17 +259,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "@"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "role"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "options"
             },
             {
               "type": "BLANK"
@@ -274,45 +289,20 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "%"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "python_section_names"
+          },
+          "named": true,
+          "value": "section_name"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "pyexit"
-            },
-            {
-              "type": "STRING",
-              "value": "variables"
-            },
-            {
-              "type": "STRING",
-              "value": "late_variables"
-            },
-            {
-              "type": "STRING",
-              "value": "config"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "@"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "role"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "role"
             },
             {
               "type": "BLANK"
@@ -337,43 +327,12 @@
         }
       ]
     },
-    "txt_content": {
+    "raw_content": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "_non_percent_line"
+        "type": "PATTERN",
+        "value": "[^%\\n]*\\n"
       }
-    },
-    "python_content": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_non_percent_line"
-      }
-    },
-    "bash_content": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_non_percent_line"
-      }
-    },
-    "_non_percent_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[^%\\n]"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[^\\n]*"
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
-        }
-      ]
     },
     "alpha_numeric": {
       "type": "PATTERN",
