@@ -16,3 +16,9 @@ The goal of this project is to provide a simple parser aimed at syntax highlight
 
 * Currently, the parser is not merged into nvim-treesitter, you need to use the following [fork](https://github.com/ntyunyayev/nvim-treesitter)
 
+### TODO
+
+* comment support
+* jinja support
+* use external scanner for more precise parsing
+

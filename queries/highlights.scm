@@ -1,5 +1,5 @@
 (txt_content) @string
 (role) @string
 (tag) @keyword
-(options) @function
+(options) @keyword
 (section_name) @property
