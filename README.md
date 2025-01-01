@@ -1,4 +1,4 @@
-# Project Title
+# tree-sitter-npf
 
 Simple tree-sitter parser for the [NPF](https://github.com/tbarbette/npf) configuration file format.
 
