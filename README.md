@@ -18,7 +18,8 @@ The goal of this project is to provide a simple parser aimed at syntax highlight
 
 ### TODO
 
-* comment support
+* integrate with more editors 
+* add tests
 * jinja support
 * use external scanner for more precise parsing
 

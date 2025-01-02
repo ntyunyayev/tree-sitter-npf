@@ -18,11 +18,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "python_section"
+          "name": "js_section"
         },
         {
           "type": "SYMBOL",
           "name": "txt_section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "python_section"
         }
       ]
     },
@@ -59,6 +63,24 @@
           },
           "named": true,
           "value": "txt_content"
+        }
+      ]
+    },
+    "js_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "js_section_header"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "js_content"
         }
       ]
     },
@@ -131,7 +153,24 @@
       "members": [
         {
           "type": "STRING",
-          "value": "%script"
+          "value": "script"
+        }
+      ]
+    },
+    "js_section_names": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "variables"
+        },
+        {
+          "type": "STRING",
+          "value": "late_variables"
+        },
+        {
+          "type": "STRING",
+          "value": "config"
         }
       ]
     },
@@ -140,19 +179,7 @@
       "members": [
         {
           "type": "STRING",
-          "value": "%pyexit"
-        },
-        {
-          "type": "STRING",
-          "value": "%variables"
-        },
-        {
-          "type": "STRING",
-          "value": "%late_variables"
-        },
-        {
-          "type": "STRING",
-          "value": "%config"
+          "value": "pyexit"
         }
       ]
     },
@@ -161,7 +188,7 @@
       "members": [
         {
           "type": "STRING",
-          "value": "%info"
+          "value": "info"
         }
       ]
     },
@@ -169,11 +196,24 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "tags"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tags"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -223,11 +263,24 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "tags"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tags"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -273,15 +326,95 @@
         }
       ]
     },
-    "python_section_header": {
+    "js_section_header": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tags"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "js_section_names"
+          },
+          "named": true,
+          "value": "section_name"
+        },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "tags"
+              "name": "role"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "options"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
+    "python_section_header": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tags"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                }
+              ]
             },
             {
               "type": "BLANK"
