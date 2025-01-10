@@ -1,5 +1,4 @@
 {
-  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "npf",
   "rules": {
     "document": {
@@ -74,13 +73,8 @@
           "name": "js_section_header"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "raw_content"
-          },
-          "named": true,
-          "value": "js_content"
+          "type": "SYMBOL",
+          "name": "_js_and_tags_content"
         }
       ]
     },
@@ -137,12 +131,25 @@
               }
             ]
           }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         }
       ]
     },
     "role": {
-      "type": "PATTERN",
-      "value": "[^\\S\\n]+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\S\\n]+"
+        }
+      ]
     },
     "options": {
       "type": "PATTERN",
@@ -203,17 +210,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tags"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "tags"
             },
             {
               "type": "BLANK"
@@ -270,17 +268,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tags"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "tags"
             },
             {
               "type": "BLANK"
@@ -337,17 +326,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tags"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "tags"
             },
             {
               "type": "BLANK"
@@ -404,17 +384,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tags"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "tags"
             },
             {
               "type": "BLANK"
@@ -459,6 +430,46 @@
           "value": "\n"
         }
       ]
+    },
+    "js_line": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^%\\n]*\\n"
+        }
+      }
+    },
+    "js_line_and_tags": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "tags"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "js_line"
+        }
+      ]
+    },
+    "_js_and_tags_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "js_line_and_tags"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "js_line"
+          }
+        ]
+      }
     },
     "raw_content": {
       "type": "REPEAT1",

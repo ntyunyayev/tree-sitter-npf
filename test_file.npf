@@ -2,13 +2,18 @@
 This is a test
 
 %config
-n_runs=1
+test1|test2:n_runs=1
 
 %variables
-DURATION=5
-TEST=2
+test1:DURATION=5
+test2:TEST=2
 
-%test1|test2:script
+%test1|test2:script@client sudo=true
 sleep 2
 sleep ${DURATION}
 echo "RESULTS-TP 5"
+
+%pyexit
+import numpy as np
+loss=RESULTS["RX"] - RESULTS["TX"]
+RESULTS["LOSS"]=loss

@@ -53,7 +53,6 @@
   {
     "type": "document",
     "named": true,
-    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -67,9 +66,23 @@
     }
   },
   {
-    "type": "js_content",
+    "type": "js_line_and_tags",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "js_line",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "js_section",
@@ -80,7 +93,11 @@
       "required": true,
       "types": [
         {
-          "type": "js_content",
+          "type": "js_line",
+          "named": true
+        },
+        {
+          "type": "js_line_and_tags",
           "named": true
         },
         {
@@ -167,6 +184,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "role",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "section",
@@ -298,6 +320,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "alpha_numeric",
     "named": true
   },
@@ -310,6 +336,10 @@
     "named": false
   },
   {
+    "type": "js_line",
+    "named": true
+  },
+  {
     "type": "late_variables",
     "named": false
   },
@@ -320,10 +350,6 @@
   {
     "type": "pyexit",
     "named": false
-  },
-  {
-    "type": "role",
-    "named": true
   },
   {
     "type": "script",
