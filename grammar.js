@@ -19,7 +19,7 @@ module.exports = grammar({
     bash_section_names: ($) => choice("script"),
     js_section_names: ($) => choice("variables", "late_variables", "config"),
     python_section_names: ($) => choice("pyexit"),
-    txt_section_names: ($) => choice("info"),
+    txt_section_names: ($) => choice("info","file"),
 
     bash_section_header: ($) => 
       seq("%",optional($.tags), alias($.bash_section_names,$.section_name), optional($.role),optional($.options),"\n"), 
