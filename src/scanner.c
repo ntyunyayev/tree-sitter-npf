@@ -1,5 +1,4 @@
-#include <tree_sitter/parser.h>
-#include <stdio.h>
+#include "tree_sitter/parser.h"
 
 enum TokenType { _CONTENT_LINE };
 
@@ -14,7 +13,6 @@ void tree_sitter_npf_external_scanner_deserialize(void *p, const char *b,
 
 bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  printf("tree_sitter_npf_external_scanner_scan\n");
   if (!valid_symbols[_CONTENT_LINE])
     return false;
 
