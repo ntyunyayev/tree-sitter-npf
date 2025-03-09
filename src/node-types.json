@@ -332,6 +332,10 @@
     "named": false
   },
   {
+    "type": "file",
+    "named": false
+  },
+  {
     "type": "info",
     "named": false
   },
