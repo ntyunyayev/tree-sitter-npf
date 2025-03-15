@@ -436,14 +436,20 @@
       ]
     },
     "js_line": {
-      "type": "TOKEN",
+      "type": "PREC",
+      "value": -1,
       "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^%\\n]*\\n"
-        }
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_content_line"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
+          }
+        ]
       }
     },
     "js_line_and_tags": {
@@ -455,7 +461,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "js_line"
+          "name": "_content_line"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         }
       ]
     },

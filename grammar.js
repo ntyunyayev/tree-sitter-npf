@@ -32,8 +32,8 @@ module.exports = grammar({
       seq("%",optional($.tags), alias($.python_section_names,$.section_name), optional($.role),optional($.options),"\n"),
 
     // Giving low priority to JS parsing
-    js_line: ($) => token(prec(-1,/[^%\n]*\n/)),
-    js_line_and_tags: ($) => seq($.tags,$.js_line),
+    js_line: ($) => prec(-1,seq($._content_line, "\n")),
+    js_line_and_tags: ($) => seq($.tags,$._content_line, "\n"),
     _js_and_tags_content: ($) => repeat1(choice($.js_line_and_tags,$.js_line)),
     raw_content: ($) => repeat1(seq($._content_line, "\n")),
     // This is dumb, but it works for now

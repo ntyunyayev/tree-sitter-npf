@@ -66,17 +66,18 @@
     }
   },
   {
+    "type": "js_line",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "js_line_and_tags",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "js_line",
-          "named": true
-        },
         {
           "type": "tags",
           "named": true
@@ -338,10 +339,6 @@
   {
     "type": "info",
     "named": false
-  },
-  {
-    "type": "js_line",
-    "named": true
   },
   {
     "type": "late_variables",

@@ -25,7 +25,7 @@ bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
   lexer->advance(lexer, false); // consume '%'
 
   // consume characters until '\n' or EOF
-  while (lexer->lookahead != '\n' && lexer->lookahead != 0) {
+  while (lexer->lookahead != '\n' && lexer->lookahead != 0 && !lexer->eof(lexer)) {
     lexer->advance(lexer, false);
     advanced = true;
   }
