@@ -38,7 +38,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "lua_file_section"
+          "name": "file_section"
         }
       ]
     },
@@ -109,21 +109,16 @@
         }
       ]
     },
-    "lua_file_section": {
+    "file_section": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "lua_file_section_header"
+          "name": "_file_section_header"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "raw_content"
-          },
-          "named": true,
-          "value": "lua_content"
+          "type": "SYMBOL",
+          "name": "file"
         }
       ]
     },
@@ -186,9 +181,52 @@
       "type": "PATTERN",
       "value": "[^\\@\\n]+"
     },
-    "filename": {
+    "file_name": {
       "type": "PATTERN",
-      "value": "[^\\s]*\\.lua[^\\s]*"
+      "value": "[^\\.\\n]+"
+    },
+    "file_extension": {
+      "type": "PATTERN",
+      "value": "[^\\n]+"
+    },
+    "file_name_and_extension": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "file_name"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file_extension"
+        }
+      ]
+    },
+    "file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "file_name_and_extension"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "file_content"
+        }
+      ]
     },
     "bash_section_names": {
       "type": "CHOICE",
@@ -234,7 +272,7 @@
         }
       ]
     },
-    "file_section_names": {
+    "_file_section_name": {
       "type": "CHOICE",
       "members": [
         {
@@ -475,7 +513,7 @@
         }
       ]
     },
-    "lua_file_section_header": {
+    "_file_section_header": {
       "type": "SEQ",
       "members": [
         {
@@ -498,7 +536,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "file_section_names"
+            "name": "_file_section_name"
           },
           "named": true,
           "value": "section_name"
@@ -514,14 +552,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "filename"
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
         }
       ]
     },

@@ -85,6 +85,76 @@
     }
   },
   {
+    "type": "file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_content",
+          "named": true
+        },
+        {
+          "type": "file_name_and_extension",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "file_name_and_extension",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_extension",
+          "named": true
+        },
+        {
+          "type": "file_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "section_name",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "js_line",
     "named": true,
     "fields": {}
@@ -137,57 +207,6 @@
       "types": [
         {
           "type": "options",
-          "named": true
-        },
-        {
-          "type": "role",
-          "named": true
-        },
-        {
-          "type": "section_name",
-          "named": true
-        },
-        {
-          "type": "tags",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lua_content",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "lua_file_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "lua_content",
-          "named": true
-        },
-        {
-          "type": "lua_file_section_header",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lua_file_section_header",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "filename",
           "named": true
         },
         {
@@ -274,11 +293,11 @@
           "named": true
         },
         {
-          "type": "js_section",
+          "type": "file_section",
           "named": true
         },
         {
-          "type": "lua_file_section",
+          "type": "js_section",
           "named": true
         },
         {
@@ -391,6 +410,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -415,7 +438,11 @@
     "named": false
   },
   {
-    "type": "filename",
+    "type": "file_extension",
+    "named": true
+  },
+  {
+    "type": "file_name",
     "named": true
   },
   {

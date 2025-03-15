@@ -2,6 +2,6 @@
 (role) @property
 (tag) @keyword
 (options) @keyword
-(filename) @keyword
+(file_name_and_extension) @keyword
 (section_name) @function
 (comment_block) @comment

@@ -4,26 +4,29 @@ module.exports = grammar({
   rules: {
     document: ($) => repeat1(choice($.section, $.comment_block)),
     section: ($) =>
-      choice($.bash_section, $.js_section, $.txt_section, $.python_section, $.lua_file_section),
+      choice($.bash_section, $.js_section, $.txt_section, $.python_section, $.file_section),
 
     bash_section: ($) => seq($.bash_section_header,  alias($.raw_content,$.bash_content,)),
     txt_section: ($) => seq($.txt_section_header, alias($.raw_content,$.txt_content)),
     js_section: ($) => seq($.js_section_header, $._js_and_tags_content),
     python_section: ($) => seq($.python_section_header, alias($.raw_content,$.python_content)),
-    lua_file_section: ($) => seq($.lua_file_section_header, alias($.raw_content,$.lua_content)),
+    file_section: ($) => seq($._file_section_header, $.file),
 
     tag: ($) => $.alpha_numeric,
     tags: ($) => seq($.tag,repeat(seq(choice(",", "|"), $.tag)),":"),
 
     role: ($) => seq("@",/[^\S\n]+/),
     options: ($) => /[^\@\n]+/,
-    filename: ($) => /[^\s]*\.lua[^\s]*/,
+    file_name: ($) => /[^\.\n]+/,
+    file_extension: ($) => /[^\n]+/,
+    file_name_and_extension: ($) => seq($.file_name,".",$.file_extension),
+    file: ($) => seq($.file_name_and_extension,"\n",alias($.raw_content,$.file_content)),
 
     bash_section_names: ($) => choice("script"),
     js_section_names: ($) => choice("variables", "late_variables", "config"),
     python_section_names: ($) => choice("pyexit"),
     txt_section_names: ($) => choice("info"),
-    file_section_names: ($) => choice("file"),
+    _file_section_name: ($) => choice("file"),
 
 
     bash_section_header: ($) => 
@@ -34,8 +37,9 @@ module.exports = grammar({
       seq("%",optional($.tags), alias($.js_section_names,$.section_name), optional($.role),optional($.options),"\n"),
     python_section_header: ($) =>
       seq("%",optional($.tags), alias($.python_section_names,$.section_name), optional($.role),optional($.options),"\n"),
-    lua_file_section_header: ($) =>
-      seq("%",optional($.tags), alias($.file_section_names,$.section_name), optional($.role),$.filename,"\n"),
+    _file_section_header: ($) =>
+      seq("%",optional($.tags), alias($._file_section_name,$.section_name), optional($.role)),
+
 
     // Giving low priority to JS parsing
     js_line: ($) => prec(-1,seq($._content_line, "\n")),
