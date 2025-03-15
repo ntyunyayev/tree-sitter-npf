@@ -51,6 +51,21 @@
     }
   },
   {
+    "type": "comment_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -58,6 +73,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "comment_block",
+          "named": true
+        },
         {
           "type": "section",
           "named": true
@@ -118,6 +137,57 @@
       "types": [
         {
           "type": "options",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "section_name",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lua_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "lua_file_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lua_content",
+          "named": true
+        },
+        {
+          "type": "lua_file_section_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lua_file_section_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
           "named": true
         },
         {
@@ -205,6 +275,10 @@
         },
         {
           "type": "js_section",
+          "named": true
+        },
+        {
+          "type": "lua_file_section",
           "named": true
         },
         {
@@ -329,12 +403,20 @@
     "named": true
   },
   {
+    "type": "comment_line",
+    "named": true
+  },
+  {
     "type": "config",
     "named": false
   },
   {
     "type": "file",
     "named": false
+  },
+  {
+    "type": "filename",
+    "named": true
   },
   {
     "type": "info",

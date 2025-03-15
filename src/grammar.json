@@ -4,8 +4,17 @@
     "document": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "section"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "section"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment_block"
+          }
+        ]
       }
     },
     "section": {
@@ -26,6 +35,10 @@
         {
           "type": "SYMBOL",
           "name": "python_section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "lua_file_section"
         }
       ]
     },
@@ -96,6 +109,24 @@
         }
       ]
     },
+    "lua_file_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "lua_file_section_header"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "raw_content"
+          },
+          "named": true,
+          "value": "lua_content"
+        }
+      ]
+    },
     "tag": {
       "type": "SYMBOL",
       "name": "alpha_numeric"
@@ -155,6 +186,10 @@
       "type": "PATTERN",
       "value": "[^\\@\\n]+"
     },
+    "filename": {
+      "type": "PATTERN",
+      "value": "[^\\s]*\\.lua[^\\s]*"
+    },
     "bash_section_names": {
       "type": "CHOICE",
       "members": [
@@ -196,7 +231,12 @@
         {
           "type": "STRING",
           "value": "info"
-        },
+        }
+      ]
+    },
+    "file_section_names": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "STRING",
           "value": "file"
@@ -435,6 +475,56 @@
         }
       ]
     },
+    "lua_file_section_header": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "tags"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "file_section_names"
+          },
+          "named": true,
+          "value": "section_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "role"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "filename"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
     "js_line": {
       "type": "PREC",
       "value": -1,
@@ -501,6 +591,26 @@
         ]
       }
     },
+    "comment_block": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comment_line"
+            },
+            {
+              "type": "STRING",
+              "value": "\n"
+            }
+          ]
+        }
+      }
+    },
     "alpha_numeric": {
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_-]+"
@@ -518,6 +628,10 @@
     {
       "type": "SYMBOL",
       "name": "_content_line"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment_line"
     }
   ],
   "inline": [],
