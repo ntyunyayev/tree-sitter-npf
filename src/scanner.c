@@ -8,6 +8,7 @@ void tree_sitter_npf_external_scanner_reset(void *p) {}
 unsigned tree_sitter_npf_external_scanner_serialize(void *p, char *buffer) {
   return 0;
 }
+
 void tree_sitter_npf_external_scanner_deserialize(void *p, const char *b,
                                                   unsigned n) {}
 
@@ -16,7 +17,10 @@ bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
   if (!valid_symbols[_CONTENT_LINE] && !valid_symbols[COMMENT_LINE]) {
     return false;
   }
-
+  while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+         lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+    lexer->advance(lexer, true);
+  }
   // Check if the first character is '%'
   if (lexer->lookahead == '%') {
     return false;

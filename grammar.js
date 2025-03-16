@@ -2,7 +2,8 @@ module.exports = grammar({
   name: "npf",
   externals: ($) => [$._content_line, $.comment_line],
   rules: {
-    document: ($) => repeat1(choice($.section, $.comment_block)),
+    document: ($) => 
+      repeat1(choice($.section, $.comment_block)),
     section: ($) =>
       choice($.bash_section, $.js_section, $.txt_section, $.python_section, $.file_section),
 
