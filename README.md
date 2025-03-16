@@ -4,7 +4,7 @@ Simple tree-sitter parser for the [NPF](https://github.com/tbarbette/npf) config
 
 ## Description
 
-The goal of this project is to provide a simple parser aimed at syntax highlighting. Exact parsing is not the primary goal. Currently only the neovim integration is working. 
+The goal of this project is to provide a simple parser aimed at syntax highlighting. Exact parsing is not the primary goal. The parser should work with any editor that supports tree-sitter.
 
 ## Getting Started
 
@@ -16,11 +16,14 @@ The goal of this project is to provide a simple parser aimed at syntax highlight
 
 * Currently, the parser is not merged into nvim-treesitter, you need to use the following [fork](https://github.com/ntyunyayev/nvim-treesitter). (I haven't managed to make *vim.treesitter.query.set* work)
 
-### TODO
+## Supported features 
 
-* Handle %file sections
-    * It would be nice to look at the extension and inject the appropriate parser
-* Integrate with more editors 
+* most sections are supported
+* %file sections correctly inject the parser based on the file extension
+* Comment inside and outside sections are supported
+
+## TODO
+
 * Add tests
 * Add support for $(( PYTHON_CODE ))
 * JINJA support
