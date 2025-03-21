@@ -613,10 +613,6 @@
           {
             "type": "SYMBOL",
             "name": "_content_line"
-          },
-          {
-            "type": "STRING",
-            "value": "\n"
           }
         ]
       }
@@ -631,11 +627,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "comment_line"
-            },
-            {
-              "type": "STRING",
-              "value": "\n"
+              "name": "_comment_line"
             }
           ]
         }
@@ -661,7 +653,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "comment_line"
+      "name": "_comment_line"
     }
   ],
   "inline": [],

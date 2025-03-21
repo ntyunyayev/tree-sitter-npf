@@ -53,17 +53,7 @@
   {
     "type": "comment_block",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "comment_line",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "document",
@@ -423,10 +413,6 @@
   },
   {
     "type": "alpha_numeric",
-    "named": true
-  },
-  {
-    "type": "comment_line",
     "named": true
   },
   {

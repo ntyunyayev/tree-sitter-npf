@@ -1,6 +1,6 @@
 #include "tree_sitter/parser.h"
 
-enum TokenType { _CONTENT_LINE, COMMENT_LINE };
+enum TokenType { _CONTENT_LINE, _COMMENT_LINE };
 
 void *tree_sitter_npf_external_scanner_create() { return NULL; }
 void tree_sitter_npf_external_scanner_destroy(void *p) {}
@@ -14,7 +14,7 @@ void tree_sitter_npf_external_scanner_deserialize(void *p, const char *b,
 
 bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  if (!valid_symbols[_CONTENT_LINE] && !valid_symbols[COMMENT_LINE]) {
+  if (!valid_symbols[_CONTENT_LINE] && !valid_symbols[_COMMENT_LINE]) {
     return false;
   }
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
@@ -26,7 +26,7 @@ bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
   } else if (lexer->lookahead == '/') {
     if (lexer->lookahead == '/') {
-      lexer->result_symbol = COMMENT_LINE;
+      lexer->result_symbol = _COMMENT_LINE;
       bool advanced = false;
       lexer->advance(lexer, false); // consume '/'
       lexer->advance(lexer, false); // consume '/'

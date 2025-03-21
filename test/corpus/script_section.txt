@@ -22,7 +22,6 @@ Script section with space
 %script
 
 printf "Open issues: %s\nClosed issues: %s\n" "34" "65"
-
 ---
 
 (document

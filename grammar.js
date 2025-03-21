@@ -1,6 +1,6 @@
 module.exports = grammar({
   name: "npf",
-  externals: ($) => [$._content_line, $.comment_line],
+  externals: ($) => [$._content_line, $._comment_line],
   rules: {
     document: ($) => 
       repeat1(choice($.section, $.comment_block)),
@@ -46,8 +46,8 @@ module.exports = grammar({
     js_line: ($) => prec(-1,seq($._content_line, "\n")),
     js_line_and_tags: ($) => seq($.tags,$._content_line, "\n"),
     _js_and_tags_content: ($) => repeat1(choice($.js_line_and_tags,$.js_line)),
-    raw_content: ($) => repeat1(seq($._content_line, "\n")),
-    comment_block: ($) => prec(-1,repeat1(seq($.comment_line, "\n"))),
+    raw_content: ($) => repeat1(seq($._content_line)),
+    comment_block: ($) => prec(-1,repeat1(seq($._comment_line))),
     // This is dumb, but it works for now
     alpha_numeric: ($) =>/[a-zA-Z0-9_-]+/,
   },
