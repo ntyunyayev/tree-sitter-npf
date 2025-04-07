@@ -24,7 +24,7 @@ module.exports = grammar({
     file: ($) => seq($.file_name_and_extension,"\n",alias($.raw_content,$.file_content)),
 
     bash_section_names: ($) => choice("script"),
-    js_section_names: ($) => choice("variables", "late_variables", "config"),
+    js_section_names: ($) => choice("variables", "late_variables", "config","include"),
     python_section_names: ($) => choice("pyexit"),
     txt_section_names: ($) => choice("info"),
     _file_section_name: ($) => choice("file"),
