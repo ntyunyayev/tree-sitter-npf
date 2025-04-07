@@ -251,6 +251,10 @@
         {
           "type": "STRING",
           "value": "config"
+        },
+        {
+          "type": "STRING",
+          "value": "include"
         }
       ]
     },
