@@ -1,0 +1,19 @@
+=====================
+Comment Basic
+=====================
+
+// This is a comment
+// This is a comment
+
+---
+(document
+  (comment_block))
+
+=======================
+Comment Basic no spaces
+=======================
+// This is a comment
+// This is a comment
+---
+(document
+  (comment_block))
