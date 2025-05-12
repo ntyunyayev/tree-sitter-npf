@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "npf",
   "rules": {
     "document": {
@@ -187,7 +188,7 @@
     },
     "file_extension": {
       "type": "PATTERN",
-      "value": "[^\\n]+"
+      "value": "[^\\s\\n]+"
     },
     "file_name_and_extension": {
       "type": "SEQ",
@@ -203,6 +204,18 @@
         {
           "type": "SYMBOL",
           "name": "file_extension"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "options"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -661,5 +674,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

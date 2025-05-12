@@ -3,6 +3,7 @@
       (_)*
       (file_extension) @injection.language
       (_)*
+      (_)*
     )
     (file_content) @injection.content)
 

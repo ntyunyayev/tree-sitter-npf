@@ -58,6 +58,7 @@
   {
     "type": "document",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -112,6 +113,10 @@
         },
         {
           "type": "file_name",
+          "named": true
+        },
+        {
+          "type": "options",
           "named": true
         }
       ]

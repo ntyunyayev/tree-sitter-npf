@@ -19,8 +19,8 @@ module.exports = grammar({
     role: ($) => seq("@",/[^\S\n]+/),
     options: ($) => /[^\@\n]+/,
     file_name: ($) => /[^\.\n]+/,
-    file_extension: ($) => /[^\n]+/,
-    file_name_and_extension: ($) => seq($.file_name,".",$.file_extension),
+    file_extension: ($) => /[^\s\n]+/,
+    file_name_and_extension: ($) => seq($.file_name,".",$.file_extension,optional($.options)),
     file: ($) => seq($.file_name_and_extension,"\n",alias($.raw_content,$.file_content)),
 
     bash_section_names: ($) => choice("script"),
