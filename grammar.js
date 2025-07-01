@@ -16,7 +16,7 @@ module.exports = grammar({
     tag: ($) => $.alpha_numeric,
     tags: ($) => seq($.tag,repeat(seq(choice(",", "|"), $.tag)),":"),
 
-    role: ($) => seq("@",/[^\S\n]+/),
+    role: ($) => seq("@",/[a-zA-Z0-9_-]+/),
     options: ($) => /[^\@\n]+/,
     file_name: ($) => /[^\.\n]+/,
     file_extension: ($) => /[^\s\n]+/,
@@ -47,7 +47,7 @@ module.exports = grammar({
     js_line_and_tags: ($) => seq($.tags,$._content_line, "\n"),
     _js_and_tags_content: ($) => repeat1(choice($.js_line_and_tags,$.js_line)),
     raw_content: ($) => repeat1(seq($._content_line)),
-    comment_block: ($) => prec(-1,repeat1(seq($._comment_line))),
+    comment_block: ($) => prec(-2,repeat1(seq($._comment_line))),
     // This is dumb, but it works for now
     alpha_numeric: ($) =>/[a-zA-Z0-9_-]+/,
   },

@@ -174,7 +174,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^\\S\\n]+"
+          "value": "[a-zA-Z0-9_-]+"
         }
       ]
     },
@@ -636,7 +636,7 @@
     },
     "comment_block": {
       "type": "PREC",
-      "value": -1,
+      "value": -2,
       "content": {
         "type": "REPEAT1",
         "content": {

@@ -1,0 +1,87 @@
+=====================
+Handling of % (1)
+=====================
+
+%bf:script
+BASE_PPT=$(expr $NPARTITIONS / $NTHREADS )
+REMAINDER=$(expr $NPARTITIONS % $NTHREADS )
+for i in $(seq 0 $((NTHREADS - 1))); do
+    START=$(expr $i \* $BASE_PPT)
+    END=$(expr $START + $BASE_PPT - 1)
+    if [ $i -lt $REMAINDER ]; then
+        END=$(expr $END + 1)
+    fi
+    echo "Thread $i: Partition range: $START to $END"
+done
+
+---
+
+(document
+  (section 
+    (bash_section
+      (bash_section_header
+        (tags
+          (tag
+            (alpha_numeric)))
+        (section_name))
+      (bash_content))))
+
+
+=====================
+Handling of % (2)
+=====================
+
+%bf:script@server
+BASE_PPT=$(expr $NPARTITIONS / $NTHREADS )
+REMAINDER=$(expr $NPARTITIONS % $NTHREADS )
+for i in $(seq 0 $((NTHREADS - 1))); do
+    START=$(expr $i \* $BASE_PPT)
+    END=$(expr $START + $BASE_PPT - 1)
+    if [ $i -lt $REMAINDER ]; then
+        END=$(expr $END + 1)
+    fi
+    echo "Thread $i: Partition range: $START to $END"
+done
+
+---
+
+(document
+  (section 
+    (bash_section
+      (bash_section_header
+        (tags
+          (tag
+            (alpha_numeric)))
+        (section_name)
+        (role))
+      (bash_content))))
+
+=====================
+Handling of % (3)
+=====================
+
+%bf:script@server jinja
+BASE_PPT=$(expr $NPARTITIONS / $NTHREADS )
+REMAINDER=$(expr $NPARTITIONS % $NTHREADS )
+for i in $(seq 0 $((NTHREADS - 1))); do
+    START=$(expr $i \* $BASE_PPT)
+    END=$(expr $START + $BASE_PPT - 1)
+    if [ $i -lt $REMAINDER ]; then
+        END=$(expr $END + 1)
+    fi
+    echo "Thread $i: Partition range: $START to $END"
+done
+
+---
+
+(document
+  (section 
+    (bash_section
+      (bash_section_header
+        (tags
+          (tag
+            (alpha_numeric)))
+        (section_name)
+        (role)
+        (options))
+      (bash_content))))

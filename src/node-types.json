@@ -1,5 +1,10 @@
 [
   {
+    "type": "alpha_numeric",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "bash_content",
     "named": true,
     "fields": {}
@@ -415,10 +420,6 @@
   {
     "type": "@",
     "named": false
-  },
-  {
-    "type": "alpha_numeric",
-    "named": true
   },
   {
     "type": "config",
