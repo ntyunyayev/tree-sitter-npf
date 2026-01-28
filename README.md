@@ -6,26 +6,75 @@ Simple tree-sitter parser for the [NPF](https://github.com/tbarbette/npf) config
 
 The goal of this project is to provide a simple parser aimed at syntax highlighting. Exact parsing is not the primary goal. The parser should work with any editor that supports tree-sitter.
 
-## Getting Started
+## Neovim Installation
 
-### Dependencies
+### 1. Register the parser with nvim-treesitter
 
-* Recent neovim
+Add this to your nvim-treesitter config (works with lazy.nvim, packer, etc.):
 
-### Installing
+```lua
+-- In your nvim-treesitter setup
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.npf = {
+    install_info = {
+        url = "https://github.com/ntyunyayev/tree-sitter-npf",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "main",
+        generate_requires_npm = false,
+        requires_generate_from_grammar = false,
+    },
+    filetype = "npf",
+}
+```
 
-* Currently, the parser is not merged into nvim-treesitter, you need to use the following [fork](https://github.com/ntyunyayev/nvim-treesitter). (I haven't managed to make *vim.treesitter.query.set* work)
+### 2. Add filetype detection
 
-## Supported features 
+Add this to your `init.lua`:
 
-* most sections are supported
-* %file sections correctly inject the parser based on the file extension
-* Comment inside and outside sections are supported
+```lua
+vim.filetype.add({
+    extension = {
+        npf = "npf",
+    },
+})
+
+-- Optional: set comment format for npf files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "npf",
+    callback = function()
+        vim.bo.commentstring = "// %s"
+    end,
+})
+```
+
+### 3. Install query files
+
+Copy the query files to your Neovim config:
+
+```bash
+mkdir -p ~/.config/nvim/queries/npf
+cp queries/highlights.scm ~/.config/nvim/queries/npf/
+cp queries/injections.scm ~/.config/nvim/queries/npf/
+```
+
+### 4. Install the parser
+
+Run in Neovim:
+```
+:TSInstall npf
+```
+
+## Supported features
+
+* All section types (`%script`, `%file`, `%variables`, `%config`, `%init`, `%exit`, etc.)
+* `%file` sections correctly inject syntax highlighting based on file extension
+* Inline Python expressions `$(( ... ))` in bash content
+* Tags (`%tag1,tag2:section`) and negative tags (`%-tag:section`)
+* Roles with multipliers (`@role`, `@role-*`, `@role-0`)
+* Jinja template flag support
+* Comments inside and outside sections
 
 ## TODO
 
-* Add tests
-* Add support for $(( PYTHON_CODE ))
-* JINJA support
-* Use external scanner for more precise parsing
-
+* Add folds.scm for section folding
+* Helix/Zed editor configuration examples
