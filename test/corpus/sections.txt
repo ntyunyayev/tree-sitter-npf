@@ -1,0 +1,197 @@
+=====================
+Info section
+=====================
+%info
+This is some info text
+
+---
+
+(document
+  (section
+    (info_section
+      (info_header)
+      (text_content))))
+
+=====================
+Config section
+=====================
+%config
+n_runs=5
+timeout=25
+
+---
+
+(document
+  (section
+    (config_section
+      (config_header)
+      (config_content
+        (content_line)
+        (content_line)))))
+
+=====================
+Variables section
+=====================
+%variables
+PARALLEL=[1-8]
+WINDOW={128,65536}
+
+---
+
+(document
+  (section
+    (variables_section
+      (variables_header)
+      (variables_content
+        (content_line)
+        (content_line)))))
+
+=====================
+Script section with role
+=====================
+%script@server
+iperf -s
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)))
+      (bash_content))))
+
+=====================
+Script section with params
+=====================
+%script@client delay=1 sudo=true
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name))
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value))))
+      (bash_content))))
+
+=====================
+Import section
+=====================
+%import graph-beautiful
+
+---
+
+(document
+  (section
+    (import_section
+      (import_header
+        module: (value)))))
+
+=====================
+Import with role and params
+=====================
+%import@server nginx PORT=8080
+
+---
+
+(document
+  (section
+    (import_section
+      (import_header
+        (role
+          name: (role_name))
+        module: (value)
+        (params
+          (param
+            value: (value)))))))
+
+=====================
+Include section
+=====================
+%include path/to/file.npf
+
+---
+
+(document
+  (section
+    (include_section
+      (include_header))))
+
+=====================
+File section
+=====================
+%file config.txt
+some file content
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (filename
+          name: (file_basename)
+          extension: (file_extension)))
+      (file_content))))
+
+=====================
+Empty script section
+=====================
+%script@dut
+%script@client
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)))))
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)))
+      (bash_content))))
+
+=====================
+Python expression in script
+=====================
+%script
+echo $(( var + 1 ))
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header)
+      (bash_content
+        (python_expr)))))
+
+=====================
+Multiple Python expressions
+=====================
+%script
+result=$(( x * 2 )) && echo $(( y ))
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header)
+      (bash_content
+        (python_expr)
+        (python_expr)))))

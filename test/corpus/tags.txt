@@ -1,0 +1,110 @@
+=====================
+Simple tag
+=====================
+%udp:script
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (tags
+          (tag
+            (identifier))))
+      (bash_content))))
+
+=====================
+Multiple tags with comma
+=====================
+%tag1,tag2:script
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (tags
+          (tag
+            (identifier))
+          (tag
+            (identifier))))
+      (bash_content))))
+
+=====================
+Multiple tags with pipe
+=====================
+%tag1|tag2:script
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (tags
+          (tag
+            (identifier))
+          (tag
+            (identifier))))
+      (bash_content))))
+
+=====================
+Negative tag
+=====================
+%-nobind:script
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (tags
+          (tag
+            (identifier))))
+      (bash_content))))
+
+=====================
+Negative and positive tags
+=====================
+%-nobind,udp:import@client dpdk-bind NIC=0
+
+---
+
+(document
+  (section
+    (import_section
+      (import_header
+        (tags
+          (tag
+            (identifier))
+          (tag
+            (identifier)))
+        (role
+          name: (role_name))
+        module: (value)
+        (params
+          (param
+            value: (value)))))))
+
+=====================
+Comments before sections
+=====================
+//comment line
+%info
+test
+
+---
+
+(document
+  (comment)
+  (section
+    (info_section
+      (info_header)
+      (text_content))))

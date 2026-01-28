@@ -1,35 +1,26 @@
 [
   {
-    "type": "alpha_numeric",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "bash_content",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "bash_section",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "bash_content",
-          "named": true
-        },
-        {
-          "type": "bash_section_header",
+          "type": "python_expr",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "bash_section_header",
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "config_content",
     "named": true,
     "fields": {},
     "children": {
@@ -37,17 +28,28 @@
       "required": true,
       "types": [
         {
-          "type": "options",
+          "type": "content_line",
           "named": true
         },
         {
-          "type": "role",
+          "type": "python_expr",
           "named": true
         },
         {
-          "type": "section_name",
+          "type": "tagged_line",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "config_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "tags",
           "named": true
@@ -56,7 +58,26 @@
     }
   },
   {
-    "type": "comment_block",
+    "type": "config_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "config_content",
+          "named": true
+        },
+        {
+          "type": "config_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "content_line",
     "named": true,
     "fields": {}
   },
@@ -70,7 +91,7 @@
       "required": true,
       "types": [
         {
-          "type": "comment_block",
+          "type": "comment",
           "named": true
         },
         {
@@ -81,7 +102,34 @@
     }
   },
   {
-    "type": "file",
+    "type": "exit_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "jinja_flag",
+          "named": true
+        },
+        {
+          "type": "params",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exit_section",
     "named": true,
     "fields": {},
     "children": {
@@ -89,11 +137,11 @@
       "required": true,
       "types": [
         {
-          "type": "file_content",
+          "type": "bash_content",
           "named": true
         },
         {
-          "type": "file_name_and_extension",
+          "type": "exit_header",
           "named": true
         }
       ]
@@ -102,10 +150,25 @@
   {
     "type": "file_content",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "python_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_extension",
+    "named": true,
     "fields": {}
   },
   {
-    "type": "file_name_and_extension",
+    "type": "file_header",
     "named": true,
     "fields": {},
     "children": {
@@ -113,15 +176,23 @@
       "required": true,
       "types": [
         {
-          "type": "file_extension",
+          "type": "filename",
           "named": true
         },
         {
-          "type": "file_name",
+          "type": "jinja_flag",
           "named": true
         },
         {
-          "type": "options",
+          "type": "noparse_flag",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
           "named": true
         }
       ]
@@ -136,15 +207,67 @@
       "required": true,
       "types": [
         {
-          "type": "file",
+          "type": "file_content",
+          "named": true
+        },
+        {
+          "type": "file_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "filename",
+    "named": true,
+    "fields": {
+      "extension": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "file_extension",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file_basename",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "import_header",
+    "named": true,
+    "fields": {
+      "module": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "params",
           "named": true
         },
         {
           "type": "role",
-          "named": true
-        },
-        {
-          "type": "section_name",
           "named": true
         },
         {
@@ -155,12 +278,7 @@
     }
   },
   {
-    "type": "js_line",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "js_line_and_tags",
+    "type": "import_section",
     "named": true,
     "fields": {},
     "children": {
@@ -168,6 +286,25 @@
       "required": true,
       "types": [
         {
+          "type": "import_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "params",
+          "named": true
+        },
+        {
           "type": "tags",
           "named": true
         }
@@ -175,30 +312,37 @@
     }
   },
   {
-    "type": "js_section",
+    "type": "include_section",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "js_line",
-          "named": true
-        },
-        {
-          "type": "js_line_and_tags",
-          "named": true
-        },
-        {
-          "type": "js_section_header",
+          "type": "include_header",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "js_section_header",
+    "type": "info_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "info_section",
     "named": true,
     "fields": {},
     "children": {
@@ -206,7 +350,34 @@
       "required": true,
       "types": [
         {
-          "type": "options",
+          "type": "info_header",
+          "named": true
+        },
+        {
+          "type": "text_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_file_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "jinja_flag",
+          "named": true
+        },
+        {
+          "type": "noparse_flag",
           "named": true
         },
         {
@@ -214,11 +385,244 @@
           "named": true
         },
         {
-          "type": "section_name",
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_file_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_content",
+          "named": true
+        },
+        {
+          "type": "init_file_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "jinja_flag",
+          "named": true
+        },
+        {
+          "type": "params",
+          "named": true
+        },
+        {
+          "type": "role",
           "named": true
         },
         {
           "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "init_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_content",
+          "named": true
+        },
+        {
+          "type": "init_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "late_variables_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "content_line",
+          "named": true
+        },
+        {
+          "type": "python_expr",
+          "named": true
+        },
+        {
+          "type": "tagged_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "late_variables_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "late_variables_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "late_variables_content",
+          "named": true
+        },
+        {
+          "type": "late_variables_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multiplier",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "param",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pyexit_header",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pyexit_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pyexit_header",
+          "named": true
+        },
+        {
+          "type": "python_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pypost_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pypost_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pypost_header",
+          "named": true
+        },
+        {
+          "type": "python_content",
           "named": true
         }
       ]
@@ -227,45 +631,33 @@
   {
     "type": "python_content",
     "named": true,
-    "fields": {}
-  },
-  {
-    "type": "python_section",
-    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "python_content",
-          "named": true
-        },
-        {
-          "type": "python_section_header",
+          "type": "python_expr",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "python_section_header",
+    "type": "python_expr",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "require_header",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "options",
-          "named": true
-        },
-        {
-          "type": "role",
-          "named": true
-        },
-        {
-          "type": "section_name",
+          "type": "jinja_flag",
           "named": true
         },
         {
@@ -276,9 +668,100 @@
     }
   },
   {
+    "type": "require_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_content",
+          "named": true
+        },
+        {
+          "type": "require_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "role",
     "named": true,
+    "fields": {
+      "multiplier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "multiplier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "role_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "role_name",
+    "named": true,
     "fields": {}
+  },
+  {
+    "type": "script_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "jinja_flag",
+          "named": true
+        },
+        {
+          "type": "params",
+          "named": true
+        },
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "script_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bash_content",
+          "named": true
+        },
+        {
+          "type": "script_header",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "section",
@@ -289,7 +772,11 @@
       "required": true,
       "types": [
         {
-          "type": "bash_section",
+          "type": "config_section",
+          "named": true
+        },
+        {
+          "type": "exit_section",
           "named": true
         },
         {
@@ -297,24 +784,89 @@
           "named": true
         },
         {
-          "type": "js_section",
+          "type": "import_section",
           "named": true
         },
         {
-          "type": "python_section",
+          "type": "include_section",
           "named": true
         },
         {
-          "type": "txt_section",
+          "type": "info_section",
+          "named": true
+        },
+        {
+          "type": "init_file_section",
+          "named": true
+        },
+        {
+          "type": "init_section",
+          "named": true
+        },
+        {
+          "type": "late_variables_section",
+          "named": true
+        },
+        {
+          "type": "pyexit_section",
+          "named": true
+        },
+        {
+          "type": "pypost_section",
+          "named": true
+        },
+        {
+          "type": "require_section",
+          "named": true
+        },
+        {
+          "type": "script_section",
+          "named": true
+        },
+        {
+          "type": "sendfile_section",
+          "named": true
+        },
+        {
+          "type": "variables_section",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "section_name",
+    "type": "sendfile_header",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "role",
+          "named": true
+        },
+        {
+          "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sendfile_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "sendfile_header",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "tag",
@@ -325,7 +877,22 @@
       "required": true,
       "types": [
         {
-          "type": "alpha_numeric",
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tagged_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tags",
           "named": true
         }
       ]
@@ -347,31 +914,22 @@
     }
   },
   {
-    "type": "txt_content",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "txt_section",
+    "type": "text_content",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "txt_content",
-          "named": true
-        },
-        {
-          "type": "txt_section_header",
+          "type": "python_expr",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "txt_section_header",
+    "type": "variables_content",
     "named": true,
     "fields": {},
     "children": {
@@ -379,19 +937,49 @@
       "required": true,
       "types": [
         {
-          "type": "options",
+          "type": "content_line",
           "named": true
         },
         {
-          "type": "role",
+          "type": "python_expr",
           "named": true
         },
         {
-          "type": "section_name",
+          "type": "tagged_line",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "variables_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "tags",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variables_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "variables_content",
+          "named": true
+        },
+        {
+          "type": "variables_header",
           "named": true
         }
       ]
@@ -406,7 +994,15 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -418,6 +1014,10 @@
     "named": false
   },
   {
+    "type": "=",
+    "named": false
+  },
+  {
     "type": "@",
     "named": false
   },
@@ -426,16 +1026,24 @@
     "named": false
   },
   {
+    "type": "exit",
+    "named": false
+  },
+  {
     "type": "file",
     "named": false
   },
   {
-    "type": "file_extension",
+    "type": "file_basename",
     "named": true
   },
   {
-    "type": "file_name",
+    "type": "identifier",
     "named": true
+  },
+  {
+    "type": "import",
+    "named": false
   },
   {
     "type": "include",
@@ -446,11 +1054,23 @@
     "named": false
   },
   {
+    "type": "init",
+    "named": false
+  },
+  {
+    "type": "init-file",
+    "named": false
+  },
+  {
+    "type": "jinja_flag",
+    "named": true
+  },
+  {
     "type": "late_variables",
     "named": false
   },
   {
-    "type": "options",
+    "type": "noparse_flag",
     "named": true
   },
   {
@@ -458,8 +1078,24 @@
     "named": false
   },
   {
+    "type": "pypost",
+    "named": false
+  },
+  {
+    "type": "require",
+    "named": false
+  },
+  {
     "type": "script",
     "named": false
+  },
+  {
+    "type": "sendfile",
+    "named": false
+  },
+  {
+    "type": "value",
+    "named": true
   },
   {
     "type": "variables",

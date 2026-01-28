@@ -1,0 +1,128 @@
+=====================
+Role with wildcard multiplier
+=====================
+%script@role-*
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)
+          multiplier: (multiplier)))
+      (bash_content))))
+
+=====================
+Role with numeric multiplier
+=====================
+%script@role-0
+echo "test"
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)
+          multiplier: (multiplier)))
+      (bash_content))))
+
+=====================
+Jinja flag
+=====================
+%script jinja
+{% for i in range(10) %}
+echo {{ i }}
+{% endfor %}
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (jinja_flag))
+      (bash_content))))
+
+=====================
+File with noparse and jinja
+=====================
+%file config.txt noparse jinja
+content here
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (filename
+          name: (file_basename)
+          extension: (file_extension))
+        (noparse_flag)
+        (jinja_flag))
+      (file_content))))
+
+=====================
+Pyexit with name
+=====================
+%pyexit myhandler
+RESULTS["new"] = 5
+
+---
+
+(document
+  (section
+    (pyexit_section
+      (pyexit_header
+        name: (identifier))
+      (python_content))))
+
+=====================
+Require section
+=====================
+%require
+test $N -lt 2
+
+---
+
+(document
+  (section
+    (require_section
+      (require_header)
+      (bash_content))))
+
+=====================
+Init section
+=====================
+%init@server
+setup_server
+
+---
+
+(document
+  (section
+    (init_section
+      (init_header
+        (role
+          name: (role_name)))
+      (bash_content))))
+
+=====================
+Exit section
+=====================
+%exit
+cleanup
+
+---
+
+(document
+  (section
+    (exit_section
+      (exit_header)
+      (bash_content))))
