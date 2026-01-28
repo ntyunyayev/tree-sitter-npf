@@ -12,6 +12,57 @@ unsigned tree_sitter_npf_external_scanner_serialize(void *p, char *buffer) {
 void tree_sitter_npf_external_scanner_deserialize(void *p, const char *b,
                                                   unsigned n) {}
 
+// Check if character is alphanumeric or underscore/hyphen (valid in identifiers)
+static bool is_identifier_char(int32_t c) {
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+         (c >= '0' && c <= '9') || c == '_' || c == '-';
+}
+
+// Check if character starts an identifier (must be alphanumeric)
+static bool is_identifier_start(int32_t c) {
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+         (c >= '0' && c <= '9');
+}
+
+// Check if the line starts with a tag pattern: identifier[,|identifier]*:
+// This DOES consume characters - only call when you're prepared for that
+// Returns true if tag pattern found (and characters consumed up to and including :)
+// Returns false if not a tag (characters still consumed!)
+static bool scan_and_check_tag(TSLexer *lexer, bool *found_tag) {
+  *found_tag = false;
+
+  // Must start with alphanumeric
+  if (!is_identifier_start(lexer->lookahead)) {
+    return false; // Not a tag, didn't consume anything
+  }
+
+  // Scan identifier
+  while (is_identifier_char(lexer->lookahead)) {
+    lexer->advance(lexer, false);
+  }
+
+  // After identifier, check for : or , or |
+  while (true) {
+    if (lexer->lookahead == ':') {
+      *found_tag = true;
+      return true;
+    }
+    if (lexer->lookahead == ',' || lexer->lookahead == '|') {
+      lexer->advance(lexer, false);
+      // Expect another identifier
+      if (!is_identifier_start(lexer->lookahead)) {
+        return true; // Consumed some chars but not a valid tag
+      }
+      while (is_identifier_char(lexer->lookahead)) {
+        lexer->advance(lexer, false);
+      }
+      continue;
+    }
+    // Not : or , or | - not a tag pattern
+    return true; // Consumed some chars but not a tag
+  }
+}
+
 // Try to scan a $(( ... )) Python expression
 // Returns true if found, false otherwise
 static bool scan_python_expr(TSLexer *lexer) {
@@ -111,6 +162,56 @@ bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
     while (lexer->lookahead != '\n' && lexer->lookahead != 0 &&
            !lexer->eof(lexer)) {
       lexer->advance(lexer, false);
+    }
+    lexer->mark_end(lexer);
+    return true;
+  }
+
+  // Check if this line starts with a tag pattern (identifier[,|identifier]*:)
+  // If so, return false to let grammar parse it as tagged_line
+  if (is_identifier_start(lexer->lookahead)) {
+    bool found_tag = false;
+    // Scan ahead to check for tag pattern
+    // We consume chars but track if we find a tag
+    while (is_identifier_char(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+    }
+
+    // Check for : or tag separators
+    while (lexer->lookahead == ',' || lexer->lookahead == '|') {
+      lexer->advance(lexer, false);
+      // Skip optional - for negative tags
+      if (lexer->lookahead == '-') {
+        lexer->advance(lexer, false);
+      }
+      if (!is_identifier_start(lexer->lookahead)) break;
+      while (is_identifier_char(lexer->lookahead)) {
+        lexer->advance(lexer, false);
+      }
+    }
+
+    if (lexer->lookahead == ':') {
+      // This is a tag! Return false to let grammar handle it
+      return false;
+    }
+
+    // Not a tag - we've consumed some chars, continue as content line
+    lexer->result_symbol = _CONTENT_LINE;
+    while (lexer->lookahead != '\n' && lexer->lookahead != 0 &&
+           !lexer->eof(lexer)) {
+      // Check for $((
+      if (valid_symbols[_PYTHON_EXPR] && lexer->lookahead == '$') {
+        lexer->mark_end(lexer);
+        lexer->advance(lexer, false);
+        if (lexer->lookahead == '(') {
+          lexer->advance(lexer, false);
+          if (lexer->lookahead == '(') {
+            return true;
+          }
+        }
+      } else {
+        lexer->advance(lexer, false);
+      }
     }
     lexer->mark_end(lexer);
     return true;

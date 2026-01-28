@@ -215,3 +215,177 @@ echo hello
       (bash_content
         (line_comment)
         (line_comment)))))
+
+=====================
+Late variables section
+=====================
+%late_variables
+RESULT=$(( PARALLEL * 2 ))
+
+---
+
+(document
+  (section
+    (late_variables_section
+      (late_variables_header)
+      (late_variables_content
+        (content_line)
+        (python_expr)))))
+
+=====================
+Pypost section
+=====================
+%pypost
+import pandas as pd
+df = pd.DataFrame(RESULTS)
+
+---
+
+(document
+  (section
+    (pypost_section
+      (pypost_header)
+      (python_content))))
+
+=====================
+Pyexit with name
+=====================
+%pyexit cleanup
+print("done")
+
+---
+
+(document
+  (section
+    (pyexit_section
+      (pyexit_header
+        name: (identifier))
+      (python_content))))
+
+=====================
+Sendfile section
+=====================
+%sendfile@server /path/to/file.conf
+
+---
+
+(document
+  (section
+    (sendfile_section
+      (sendfile_header
+        (role
+          name: (role_name))))))
+
+=====================
+Init-file section
+=====================
+%init-file@dut config.sh
+#!/bin/bash
+echo "init"
+
+---
+
+(document
+  (section
+    (init_file_section
+      (init_file_header
+        (role
+          name: (role_name))
+        (filename
+          name: (file_basename)
+          extension: (file_extension)))
+      (file_content))))
+
+=====================
+File with noparse and jinja flags
+=====================
+%file@client template.py noparse jinja
+{{ variable }}
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (role
+          name: (role_name))
+        (filename
+          name: (file_basename)
+          extension: (file_extension))
+        (noparse_flag)
+        (jinja_flag))
+      (file_content))))
+
+=====================
+Variables with tags
+=====================
+%variables
+test:RATE=1000
+cpu,memory:LIMIT=512
+
+---
+
+(document
+  (section
+    (variables_section
+      (variables_header)
+      (variables_content
+        (tagged_line
+          (tags
+            (tag
+              (identifier))))
+        (tagged_line
+          (tags
+            (tag
+              (identifier))
+            (tag
+              (identifier))))))))
+
+=====================
+Multiple sections document
+=====================
+%info
+Test experiment
+%config
+n_runs=3
+%script@server
+iperf -s
+
+---
+
+(document
+  (section
+    (info_section
+      (info_header)
+      (text_content)))
+  (section
+    (config_section
+      (config_header)
+      (config_content
+        (content_line))))
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)))
+      (bash_content))))
+
+=====================
+Script with jinja flag
+=====================
+%script@client jinja
+{% for i in range(10) %}
+echo {{ i }}
+{% endfor %}
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name))
+        (jinja_flag))
+      (bash_content))))
