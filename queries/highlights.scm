@@ -53,3 +53,4 @@
 
 ; Comments
 (comment) @comment
+(line_comment) @comment

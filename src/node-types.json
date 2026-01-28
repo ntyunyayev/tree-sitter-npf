@@ -8,6 +8,10 @@
       "required": false,
       "types": [
         {
+          "type": "line_comment",
+          "named": true
+        },
+        {
           "type": "python_expr",
           "named": true
         }
@@ -29,6 +33,10 @@
       "types": [
         {
           "type": "content_line",
+          "named": true
+        },
+        {
+          "type": "line_comment",
           "named": true
         },
         {
@@ -155,6 +163,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "line_comment",
+          "named": true
+        },
         {
           "type": "python_expr",
           "named": true
@@ -469,6 +481,10 @@
           "named": true
         },
         {
+          "type": "line_comment",
+          "named": true
+        },
+        {
           "type": "python_expr",
           "named": true
         },
@@ -512,6 +528,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "line_comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "multiplier",
@@ -636,6 +657,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "line_comment",
+          "named": true
+        },
         {
           "type": "python_expr",
           "named": true
@@ -922,6 +947,10 @@
       "required": false,
       "types": [
         {
+          "type": "line_comment",
+          "named": true
+        },
+        {
           "type": "python_expr",
           "named": true
         }
@@ -938,6 +967,10 @@
       "types": [
         {
           "type": "content_line",
+          "named": true
+        },
+        {
+          "type": "line_comment",
           "named": true
         },
         {

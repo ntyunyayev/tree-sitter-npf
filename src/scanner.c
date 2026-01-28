@@ -97,6 +97,25 @@ bool tree_sitter_npf_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
   }
 
+  // Check if this is a comment line (starts with //)
+  // Let the grammar handle it as line_comment
+  if (lexer->lookahead == '/') {
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '/') {
+      // This is a comment line - don't consume it, let grammar match line_comment
+      return false;
+    }
+    // Not a comment, but we already consumed one '/', so continue as content
+    // Mark that we have content
+    lexer->result_symbol = _CONTENT_LINE;
+    while (lexer->lookahead != '\n' && lexer->lookahead != 0 &&
+           !lexer->eof(lexer)) {
+      lexer->advance(lexer, false);
+    }
+    lexer->mark_end(lexer);
+    return true;
+  }
+
   // This is a content line - consume until newline, EOF, or $((
   lexer->result_symbol = _CONTENT_LINE;
 

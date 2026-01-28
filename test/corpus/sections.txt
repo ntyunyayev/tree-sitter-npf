@@ -195,3 +195,23 @@ result=$(( x * 2 )) && echo $(( y ))
       (bash_content
         (python_expr)
         (python_expr)))))
+
+=====================
+Comments inside script
+=====================
+%script@client
+//This is a comment
+echo hello
+//Another comment
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (role
+          name: (role_name)))
+      (bash_content
+        (line_comment)
+        (line_comment)))))

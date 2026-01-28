@@ -2,6 +2,21 @@ module.exports = grammar({
   name: "npf",
   externals: ($) => [$._content_line, $._python_expr],
 
+  conflicts: ($) => [
+    [$.info_section],
+    [$.config_section],
+    [$.variables_section],
+    [$.late_variables_section],
+    [$.pypost_section],
+    [$.script_section],
+    [$.init_section],
+    [$.exit_section],
+    [$.require_section],
+    [$.pyexit_section],
+    [$.file_section],
+    [$.init_file_section],
+  ],
+
   rules: {
     // Document can contain standalone comments before/between sections
     document: ($) => seq(optional($.comment), repeat1(seq($.section, optional($.comment)))),
@@ -274,12 +289,15 @@ module.exports = grammar({
 
     // Content with optional tag prefixes (for variables/config)
     _tagged_content: ($) =>
-      repeat1(choice($.tagged_line, $.content_line, $.python_expr)),
+      prec.right(repeat1(choice($.tagged_line, $.content_line, $.python_expr, $.line_comment))),
     tagged_line: ($) => seq($.tags, $._content_line),
     content_line: ($) => $._content_line,
 
-    // Raw content (no tag parsing) - can include inline Python expressions
-    raw_content: ($) => repeat1(choice($._content_line, $.python_expr)),
+    // Raw content (no tag parsing) - can include inline Python expressions and comments
+    raw_content: ($) => prec.right(repeat1(choice($._content_line, $.python_expr, $.line_comment))),
+
+    // Line comment inside content (// to end of line)
+    line_comment: ($) => prec(1, /\/\/[^\n]*\n/),
 
     // Python expression $(( ... )) - injects Python code
     python_expr: ($) => $._python_expr,
