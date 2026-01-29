@@ -64,6 +64,28 @@ Run in Neovim:
 :TSInstall npf
 ```
 
+### Uninstall / Clean Previous Installation
+
+To remove a previous installation:
+
+```bash
+# Remove the query files
+rm -rf ~/.config/nvim/queries/npf
+
+# Remove the installed parser
+rm -f ~/.local/share/nvim/lazy/nvim-treesitter/parser/npf.so
+# Or if using a different plugin manager:
+rm -f ~/.local/share/nvim/site/parser/npf.so
+
+# Clear nvim-treesitter cache (if it exists)
+rm -rf ~/.cache/nvim/treesitter
+```
+
+You can also run in Neovim:
+```vim
+:TSUninstall npf
+```
+
 ## Supported features
 
 * All section types (`%script`, `%file`, `%variables`, `%config`, `%init`, `%exit`, etc.)
