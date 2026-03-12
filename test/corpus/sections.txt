@@ -389,3 +389,279 @@ echo {{ i }}
           name: (role_name))
         (jinja_flag))
       (bash_content))))
+
+=====================
+Module-style script with multiple params
+=====================
+%script deps=wrk-tbarbette title=WRKClient sudo=true autokill=false
+wrk --latency
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value))
+          (param
+            value: (value))
+          (param
+            value: (value))))
+      (bash_content))))
+
+=====================
+Tagged file section from module
+=====================
+%-rate:file@client mid.sh
+#!/bin/bash
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (tags
+          (tag
+            (identifier)))
+        (role
+          name: (role_name))
+        (filename
+          name: (file_basename)
+          extension: (file_extension)))
+      (file_content))))
+
+=====================
+Require section with multiple tags
+=====================
+%prate,timing:require
+test "$GEN_RATE" -gt 0
+
+---
+
+(document
+  (section
+    (require_section
+      (require_header
+        (tags
+          (tag
+            (identifier))
+          (tag
+            (identifier))))
+      (bash_content))))
+
+=====================
+Script with colon params
+=====================
+%udp:script@client 0:ip=10.1.0.2 1:ip=10.2.0.2 sudo=true autokill=false
+run-client
+
+---
+
+(document
+  (section
+    (script_section
+      (script_header
+        (tags
+          (tag
+            (identifier)))
+        (role
+          name: (role_name))
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value))
+          (param
+            value: (value))
+          (param
+            value: (value))))
+      (bash_content))))
+
+=====================
+Tagged sendfile section
+=====================
+%-nolibs:sendfile ../libs/perf/
+
+---
+
+(document
+  (section
+    (sendfile_section
+      (sendfile_header
+        (tags
+          (tag
+            (identifier)))))))
+
+=====================
+Init-file with noparse from module
+=====================
+%init-file set_irq_affinity.sh noparse
+#!/bin/bash
+
+---
+
+(document
+  (section
+    (init_file_section
+      (init_file_header
+        (filename
+          name: (file_basename)
+          extension: (file_extension))
+        (noparse_flag))
+      (file_content))))
+
+=====================
+Uppercase file name with jinja
+=====================
+%file PKTGEN_CONFIG_${RCV_NIC} jinja
+define ($MTU 1500)
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (filename
+          name: (file_basename))
+        (jinja_flag))
+      (file_content))))
+
+=====================
+Tagged init section from module
+=====================
+%igb_uio:init sudo=true deps=dpdk
+echo "Driver is $DRIVER"
+
+---
+
+(document
+  (section
+    (init_section
+      (init_header
+        (tags
+          (tag
+            (identifier)))
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value))))
+      (bash_content))))
+
+=====================
+Negative tagged init section
+=====================
+%-igb_uio:init sudo=true deps=dpdk
+modprobe $DRIVER
+
+---
+
+(document
+  (section
+    (init_section
+      (init_header
+        (tags
+          (tag
+            (identifier)))
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value))))
+      (bash_content))))
+
+=====================
+Tagged import with negative tag and params
+=====================
+%-nostat:import@server perf-stat delay=2 autokill=false
+
+---
+
+(document
+  (section
+    (import_section
+      (import_header
+        (tags
+          (tag
+            (identifier)))
+        (role
+          name: (role_name))
+        module: (value)
+        (params
+          (param
+            value: (value))
+          (param
+            value: (value)))))))
+
+=====================
+Piped tags on file section
+=====================
+%sprayer|sprayergen:file SPRAYER
+define ($X 1)
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (tags
+          (tag
+            (identifier))
+          (tag
+            (identifier)))
+        (filename
+          name: (file_basename)))
+      (file_content))))
+
+=====================
+Dashed filename in file section
+=====================
+%file PKTGEN-CONFIG
+define ($MTU 1500)
+
+---
+
+(document
+  (section
+    (file_section
+      (file_header
+        (filename
+          name: (file_basename)))
+      (file_content))))
+
+=====================
+Pyexit with extra spaces before name
+=====================
+%pyexit  test
+RESULTS["ok"] = 1
+
+---
+
+(document
+  (section
+    (pyexit_section
+      (pyexit_header
+        name: (identifier))
+      (python_content))))
+
+=====================
+Require with jinja flag
+=====================
+%require jinja
+{% if enabled %}true{% endif %}
+
+---
+
+(document
+  (section
+    (require_section
+      (require_header
+        (jinja_flag))
+      (bash_content))))

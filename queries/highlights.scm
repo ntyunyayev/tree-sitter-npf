@@ -42,6 +42,7 @@
 (file_content) @string
 (config_content) @property
 (variables_content) @property
+(late_variables_content) @property
 
 ; Inline Python expressions $(( ... ))
 (python_expr) @embedded
