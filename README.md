@@ -86,6 +86,10 @@ You can also run in Neovim:
 :TSUninstall npf
 ```
 
+## Helix Installation
+
+Instructions for installing the parser in the Helix editor are provided in [helix.md](helix.md).
+
 ## Supported features
 
 * All section types (`%script`, `%file`, `%variables`, `%config`, `%init`, `%exit`, etc.)
