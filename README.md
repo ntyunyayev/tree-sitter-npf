@@ -103,4 +103,4 @@ Instructions for installing the parser in the Helix editor are provided in [heli
 ## TODO
 
 * Add folds.scm for section folding
-* Helix/Zed editor configuration examples
+* Zed editor configuration examples
